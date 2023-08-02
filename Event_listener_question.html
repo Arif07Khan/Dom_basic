@@ -1,0 +1,52 @@
+<!-- Event Listener Question some Basic with function and without function -->
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Event Listener Example</title>
+    <style>
+        p {
+            font-size: 18px;
+            color: black;
+        }
+
+        img {
+            width: 200px;
+            border-radius: 0;
+            transition: all 0.3s ease;
+        }
+
+        .highlight {
+            color: red;
+        }
+
+        .rounded {
+            border-radius: 50%;
+        }
+    </style>
+</head>
+<body>
+    <h1>Click to Change Paragraph Color and Image Border Radius</h1>
+    <p id="myParagraph">This is a sample paragraph. Click to change its color.</p>
+    <img id="myImage" src="path/to/your/image.jpg" alt="Sample Image" />
+
+    <script>
+        const paragraph = document.getElementById("myParagraph");
+        const image = document.getElementById("myImage");
+
+        // Function to change the paragraph color
+        function changeParagraphColor() {
+            paragraph.classList.toggle("highlight");
+        }
+
+        // Function to change the image border radius
+        function changeImageRadius() {
+            image.classList.toggle("rounded");
+        }
+
+        // Add event listeners to the elements
+        paragraph.addEventListener("click", changeParagraphColor);
+        image.addEventListener("click", changeImageRadius);
+    </script>
+</body>
+</html>

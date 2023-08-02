@@ -1,0 +1,133 @@
+<!-- without function -->
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Event Listener Example (without functions)</title>
+    <style>
+        p {
+            font-size: 18px;
+            color: black;
+        }
+        h1{
+            font-size: 18px;
+            color: black;
+        }
+
+        img {
+            width: 200px;
+            border-radius: 0;
+            transition: all 0.3s ease;
+        }
+
+        .highlight {
+            color: red;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 3rem;
+        }
+
+        .rounded {
+            border-radius: 50%;
+        }
+        .input{
+            width: 500px;
+            height: 50px;
+            background-color: rgb(208, 208, 208);
+            border-radius: 50px;
+            font-size: 15px;
+            padding: 0 20px;
+            margin-top: 20px;
+        }
+        .button{
+            width: 100px;
+            height: 50px;
+            background-color: rgb(255, 137, 137);
+            border-radius: 50px;
+            font-size: 15px;
+            padding: 0 20px;
+            margin-top: 20px;
+            margin-left: 20px ;
+        }
+        .none{
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <h1>Click to Change Paragraph Color and Image Border Radius</h1>
+    <p id="myParagraph" >This is a sample paragraph. Click to change its color.</p>
+    <img id="myImage" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQPCXISA7AWonO3J24GKCgtJ9e4OTuaJHSBM7rcN3j28GfR6eJAJTe1Gi_AlJpG6wuFnCs&usqp=CAU" alt="Sample Image"  />
+    <div id="input_div">
+
+    </div>
+    <div>
+        <form action="" name="form" onsubmit="form_submit()">
+            <input type="text" class="input" name="name" id="input_name" placeholder="Enter your name">
+            <input type="text" class="input" name="about" id="input_email" placeholder="About U">
+            <input type="text" class="input" name="phone" id="input_phone" placeholder="Enter your Phone">
+            <input type="submit" value="Submit" class="button" >
+        </form>
+    </div>
+    <script>
+        const heading = document.querySelector("h1");
+        const para = document.getElementById("myParagraph");
+        const input = document.createElement("input");
+        const div = document.getElementById("input_div");
+        const image = document.getElementById("myImage");
+        input.classList.add("input");
+        input.setAttribute("type", "text");
+        input.setAttribute("placeholder", "Enter your name");
+        const button = document.createElement("button");
+        button.innerHTML = "Submit";
+        button.classList.add("button");
+        div.appendChild(input);
+        div.appendChild(button);
+        para.addEventListener("click", function() {
+            para.classList.toggle("highlight");
+        });
+        heading.addEventListener("click", function() {
+            heading.classList.toggle("highlight");
+        });
+        image.addEventListener("click", function() {
+            image.classList.toggle("rounded");
+        });
+        input.addEventListener("change", function() {
+            if(input.value==""){
+                alert("Please Enter Image URL")
+                image.setAttribute("src", "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQPCXISA7AWonO3J24GKCgtJ9e4OTuaJHSBM7rcN3j28GfR6eJAJTe1Gi_AlJpG6wuFnCs&usqp=CAU")
+            }else{
+
+                image.setAttribute("src", input.value);
+            }
+        });
+        input.addEventListener("input", function() {
+            heading.innerHTML = "Welcome"+ input.value;
+        });
+        button.addEventListener("click", function() {
+            const image_array = [ "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQPCXISA7AWonO3J24GKCgtJ9e4OTuaJHSBM7rcN3j28GfR6eJAJTe1Gi_AlJpG6wuFnCs&usqp=CAU","https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR7yJV9q64ErKcDleGnLFKpFEwXEusjRYkUeBm_Q4C62CHYem60VE4Oc9j3mrbb2w5KMKg&usqp=CAU","https://media.istockphoto.com/id/524381338/photo/hiker-taking-photos.jpg?s=612x612&w=0&k=20&c=eio_e2m7pTeIWUgbA3asptf0nbBC7QQogzvnfz3nc5c=" ]
+            var random_image= image_array[Math.floor(Math.random() * image_array.length)];
+            console.log(random_image);
+            image.setAttribute("src", random_image);
+            
+        });
+        function form_submit(){
+            window.event.preventDefault();
+            var name = document.getElementById("input_name").value;
+            var email = document.getElementById("input_email").value;
+            var phone = document.getElementById("input_phone").value;
+            var p = document.createElement("p");
+            var button = document.createElement("button");
+            button.innerHTML = "Delete";
+            button.classList.add("button");
+            button.setAttribute("onclick", "this.parentNode.remove()" );
+            p.innerHTML = "Name: "+name+"<br>"+"Email: "+email+"<br>"+"Phone: "+phone;
+            p.appendChild(button);
+            div.appendChild(p);
+            
+            document.getElementById("input_name").value = "";
+            document.getElementById("input_email").value = "";
+            document.getElementById("input_phone").value = "";
+        }
+        </script>
+</body>
+</html>
